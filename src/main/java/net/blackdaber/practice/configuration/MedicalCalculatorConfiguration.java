@@ -13,8 +13,8 @@ import java.util.Map;
 public class MedicalCalculatorConfiguration {
 
     @Bean
-    public Map<CalculatorType, MedicalCalculatorService> medicalCalculatorServices(List<MedicalCalculatorService> handlers) {
-        var map = new HashMap<CalculatorType, MedicalCalculatorService>();
+    public Map<CalculatorType, MedicalCalculatorService<?>> medicalCalculatorServices(List<MedicalCalculatorService<?>> handlers) {
+        var map = new HashMap<CalculatorType, MedicalCalculatorService<?>>();
 
         for (var handler : handlers) {
             map.compute(handler.getCalculatorType(), (calculatorType, medicalCalculatorService) -> {

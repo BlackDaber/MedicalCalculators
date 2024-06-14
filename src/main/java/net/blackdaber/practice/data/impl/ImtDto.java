@@ -1,5 +1,8 @@
 package net.blackdaber.practice.data.impl;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -11,7 +14,14 @@ import net.blackdaber.practice.data.AbstractDto;
 @Data
 public class ImtDto extends AbstractDto {
 
-    int m;
-    int h;
+    @Min(1)
+    @Max(1000)
+    @Schema(example = "52", description = "Масса")
+    int weight;
+
+    @Min(1)
+    @Max(1000)
+    @Schema(example = "163", description = "Рост")
+    int height;
 }
 

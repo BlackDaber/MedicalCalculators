@@ -1,0 +1,170 @@
+openapi: 3.1.0
+info:
+  title: Swagger MedicalCalculator - OpenAPI 3.0
+  description: |-
+    This is a sample Medical Calculator Service Server based on the OpenAPI 3.0 specification.  You can find out more about
+    Swagger at [https://swagger.io](https://swagger.io).
+    
+    Some useful links:
+    - [The Medical Calculator Service repository](https://github.com/BlackDaber/MedicalCalculators)
+    - [The source API definition for the Medical Calculator Service](https://github.com/swagger-api/swagger-petstore/blob/master/src/main/resources/openapi.yaml)
+  termsOfService: http://swagger.io/terms/
+  contact:
+    name: Blackdaber
+    email: sergej.granovskij@list.ru
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/calculator
+    description: Dev service
+  - url: http://localhost:8082/calculator
+    description: Test service
+tags:
+  - name: info
+    description: Everything about our avalaible calculators
+  - name: calculate
+    description: Operations about calculators
+paths:
+  /map/info:
+    get:
+      tags:
+        - info
+      summary: Gets calculator information
+      description: Returns Map calculator information
+      operationId: getMapInfo
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalculatorInfo'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/CalculatorInfo'
+  /imt/info:
+    get:
+      tags:
+        - info
+      summary: Gets calculator information
+      description: Returns Imt calculator information
+      operationId: getImtInfo
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalculatorInfo'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/CalculatorInfo'
+  /imt/result:
+    post:
+      tags:
+        - calculate
+      summary: Calculate result from your data
+      description: Calculate Imt result from your data
+      operationId: calculateImt
+      requestBody:
+        description: Calculate Imt in Imt Calcaulator
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Imt'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Imt'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Imt'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultInfo'
+        '422':
+          description: Validation exception
+  /map/result:
+    post:
+      tags:
+        - calculate
+      summary: Calculate result from your data
+      description: Calculate Map result from your data
+      operationId: calculateMap
+      requestBody:
+        description: Calculate Map in Map Calcaulator
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Map'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Map'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultInfo'
+        '422':
+          description: Validation exception
+components:
+  schemas:
+    CalculatorInfo:
+      type: object
+      properties:
+        info:
+          type: string
+          example: Калькулятор расчета
+    Imt:
+      type: object
+      properties:
+        weight:
+          type: integer
+          format: int32
+          example: 52
+        height:
+          type: integer
+          format: int32
+          example: 163
+    Map:
+      type: object
+      properties:
+        sad:
+          type: integer
+          format: int32
+          example: 52
+        dad:
+          type: integer
+          format: int32
+          example: 163
+    ResultInfo:
+      type: object
+      properties:
+        result:
+          type: string
+          example: Какой-то результат
+    ErrorMessage:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+          example: 422
+        result:
+          type: string
+          example: 2024-06-14T12:10:11.663Z
+        message:
+          type: string
+          example: Error message
+        description:
+          type: string
+          example: Error description

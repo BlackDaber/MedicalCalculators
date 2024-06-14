@@ -1,4 +1,6 @@
 package net.blackdaber.practice.data;
 
-public record ResultInfo(String result) {
+import io.swagger.v3.oas.annotations.media.Schema;
+
+public record ResultInfo(@Schema(example = "Какой-то результат") String result) {
 }
