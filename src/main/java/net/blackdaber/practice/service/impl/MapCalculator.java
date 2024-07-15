@@ -14,8 +14,8 @@ public class MapCalculator implements MedicalCalculatorService<MapDto> {
 
     @Override
     public ResultInfo calculate(MapDto dto) {
-        var dad = (double) dto.getDbp();
-        var sad = (double) dto.getSbp();
+        var dad = dto.getDbp();
+        var sad = dto.getSbp();
 
         var result = BigDecimal.valueOf(0.333 * sad + 0.666 * dad);
 

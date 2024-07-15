@@ -44,5 +44,4 @@ public class SwaggerDocumentationConfig {
                                 .description("Test service"))
                 );
     }
-
 }
