@@ -1,6 +1,5 @@
 package net.blackdaber.practice.service.impl;
 
-import net.blackdaber.practice.data.CalculatorType;
 import net.blackdaber.practice.data.ResultInfo;
 import net.blackdaber.practice.data.impl.ImtDto;
 import net.blackdaber.practice.service.MedicalCalculatorService;
@@ -17,11 +16,8 @@ public class ImtCalculator implements MedicalCalculatorService<ImtDto> {
         var height = (double) dto.getHeight() / 100;
         var result = BigDecimal.valueOf((double) dto.getWeight() / (height * height));
 
-        return new ResultInfo("%s Выраженный дефицит массы тела".formatted(result.setScale(2, RoundingMode.HALF_UP)));
-    }
-
-    @Override
-    public CalculatorType getCalculatorType() {
-        return CalculatorType.IMT;
+        return new ResultInfo(
+                "%s Выраженный дефицит массы тела".formatted(result.setScale(2, RoundingMode.HALF_UP))
+        );
     }
 }

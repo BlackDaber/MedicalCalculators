@@ -1,6 +1,5 @@
 package net.blackdaber.practice.service.impl;
 
-import net.blackdaber.practice.data.CalculatorType;
 import net.blackdaber.practice.data.ResultInfo;
 import net.blackdaber.practice.data.impl.MapDto;
 import net.blackdaber.practice.service.MedicalCalculatorService;
@@ -23,13 +22,11 @@ public class MapCalculator implements MedicalCalculatorService<MapDto> {
             return new ResultInfo("%s Гипертензия".formatted(result.setScale(0, RoundingMode.HALF_UP)));
         }
         if (result.compareTo(BigDecimal.valueOf(70)) < 0) {
-            return new ResultInfo("%s Гипотензия. Возможна гипоксия и ишемия тканей".formatted(result.setScale(0, RoundingMode.HALF_UP)));
+            return new ResultInfo(
+                    "%s Гипотензия. Возможна гипоксия и ишемия тканей"
+                            .formatted(result.setScale(0, RoundingMode.HALF_UP))
+            );
         }
         return new ResultInfo("%s Норма".formatted(result.setScale(0, RoundingMode.HALF_UP)));
-    }
-
-    @Override
-    public CalculatorType getCalculatorType() {
-        return CalculatorType.MAP;
     }
 }
